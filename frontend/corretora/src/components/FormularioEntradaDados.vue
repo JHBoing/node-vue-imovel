@@ -52,16 +52,13 @@ export default {
             e.preventDefault();
             let form = this.form;
             this.carregando = true;
-            axios.post({
-                url: "http://localhost:8000/enviar",
-                data: {
-                    form
-                }
-            })
+            axios.post(
+                "http://localhost:8000/api/",
+                form
+            )
             .then((response) => {
                 this.carregando = false;
                 this.lista = response.data;
-                console.log(this.lista);
             }, (error) => {
                 this.carregando = false;
                 console.log("erro");
