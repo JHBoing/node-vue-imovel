@@ -24,9 +24,22 @@
         <div v-if="carregando">
             Carregando...
         </div>
-        <div>
-            <p>{{ lista }}</p>
-        </div>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">Saldo devedor</th>
+                <th scope="col" class="text-center">Juros</th>
+                <th scope="col" class="text-center">Valor</th>
+            </thead>
+            <tbody>
+                <tr v-for="item in lista" :key="item.numero">
+                    <th scope="row">{{item.numero}}</th>
+                    <td>{{item.saldoDevedor}}</td>
+                    <td>{{item.juros}}</td>
+                    <td>{{item.valorParcela}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>  
 </template>
 
@@ -43,7 +56,7 @@ export default {
                 numeroParcelas: '',
                 porcentagemEntrada: '',
             },
-            lista: '',
+            lista: [],
             carregando: false,
         }
     },
@@ -68,7 +81,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .container {
         display: flex;
