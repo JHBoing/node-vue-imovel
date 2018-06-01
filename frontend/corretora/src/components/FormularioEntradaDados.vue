@@ -66,7 +66,7 @@ export default {
             let form = this.form;
             this.carregando = true;
             axios.post(
-                "http://localhost:8000/api/",
+                "http://localhost:8000/api/parcelas",
                 form
             )
             .then((response) => {

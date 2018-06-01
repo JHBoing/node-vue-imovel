@@ -6,20 +6,14 @@ app.use(bodyParser.json({ type: 'application/json' }));
 
 var api = express.Router();
 
-api.post('/', function(req, res) {
-	console.log(req.body);
-
-	let valorImovel = req.body.valorImovel;
-	let taxa = req.body.taxa/100;
-	let numeroParcelas = req.body.numeroParcelas;
-	let porcentagemEntrada = req.body.porcentagemEntrada/100;
-	taxa = Math.pow((1+taxa),(1/12))-1;
-
-	let entrada = valorImovel*porcentagemEntrada;
-	let financiavel = valorImovel - entrada;
-	let amortizacao = financiavel/numeroParcelas;
+function calculoParcelas(dadosCalculo) {
+	console.log("entrou aqui");
+	let entrada = dadosCalculo.valorImovel * dadosCalculo.porcentagemEntrada;
+	let financiavel = dadosCalculo.valorImovel - entrada;
+	let amortizacao = financiavel/dadosCalculo.numeroParcelas;
+	let numeroParcelas = dadosCalculo.numeroParcelas;
+	let taxa = dadosCalculo.taxa;
 	let parcelas = [];
-
 
 	for(let i = 0; i < numeroParcelas; i++) {
 		let numero = '';
@@ -52,7 +46,33 @@ api.post('/', function(req, res) {
 			});
 		}
 	}
+
+	return parcelas;
+
+}
+
+api.post('/parcelas', function(req, res) {
+
+	let valorImovel = req.body.valorImovel;
+	let taxa = req.body.taxa/100;
+	let numeroParcelas = req.body.numeroParcelas;
+	let porcentagemEntrada = req.body.porcentagemEntrada/100;
+	taxa = Math.pow((1+taxa),(1/12))-1;	
+
+	dadosCalculo = {
+		valorImovel,
+		taxa,
+		numeroParcelas,
+		porcentagemEntrada,
+	}
+	
+	parcelas = calculoParcelas(dadosCalculo);
+	console.log(parcelas);
 	res.send(parcelas);
+});
+
+api.post('/salario', function () {
+
 });
 
 app.use('/api', api);
