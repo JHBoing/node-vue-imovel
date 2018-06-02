@@ -1,6 +1,7 @@
-const routes = require('./routes');
+var express = require('express');
+var router = express.Router();
 
-module.exports = function(app) {
-  routes(app);
-  // Other route groups could go here, in the future
-};
+router.use('/exercicio1', require('./exercicio1'));
+router.use('/exercicio3', require('./exercicio3'));
+
+module.exports = router;
