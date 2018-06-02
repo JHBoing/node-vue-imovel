@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <FormularioEntradaDados/>
+    <Index/>
   </div>
 </template>
 
 <script>
-import FormularioEntradaDados from './components/FormularioEntradaDados'
+import Index from './components/Index'
 
 export default {
   name: 'App',
   components: {
-    FormularioEntradaDados
+    Index,
   }
 }
 </script>

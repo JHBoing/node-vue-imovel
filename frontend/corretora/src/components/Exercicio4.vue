@@ -7,16 +7,12 @@
                     <input type="number" class="form-control" id="valorImovel"  placeholder="R$" v-model="form.valorImovel">
                 </div>
                 <div class="form-group">
-                    <label for="taxa">Taxa</label>
-                    <input type="number" class="form-control" id="taxa" placeholder="%" v-model="form.taxa">
+                    <label for="salario">Salario</label>
+                    <input type="number" class="form-control" id="salario" placeholder="%" v-model="form.salario">
                 </div>
                 <div class="form-group">
                     <label for="parcelas">N° de Parcelas</label>
                     <input type="number" class="form-control" id="parcelas" placeholder="N° de Parcelas" v-model="form.numeroParcelas">
-                </div>
-                <div class="form-group">
-                    <label for="parcelas">% de Entrada</label>
-                    <input type="number" class="form-control" id="parcelas" placeholder="% de entrada" v-model="form.porcentagemEntrada">
                 </div>
                 <button type="submit" class="btn btn-success" v-on:click="enviarDados">Submit</button>
             </form>
@@ -40,21 +36,20 @@
                 </tr>
             </tbody>
         </table>
-    </div>  
+    </div>
 </template>
-
 <script>
 import axios from 'axios';
 
 export default {
-    name: 'FormularioEntradaDados',
-    data () {
+    name: 'Exercicio4',
+    data() {
         return {
             form: {
                 valorImovel: '',
-                taxa: '',
+                taxa: '10',
                 numeroParcelas: '',
-                porcentagemEntrada: '',
+                porcentagemEntrada: '20',
             },
             lista: [],
             carregando: false,
@@ -66,7 +61,7 @@ export default {
             let form = this.form;
             this.carregando = true;
             axios.post(
-                "http://localhost:8000/api/parcelas",
+                "http://localhost:8000/api/exercicio3",
                 form
             )
             .then((response) => {
@@ -79,6 +74,8 @@ export default {
         }
     }
 }
+
+
 </script>
 
 <style scoped>
@@ -110,22 +107,5 @@ export default {
 
     .form-tag button {
         background: #41B883;
-    }
-
-    h1, h2 {
-        font-weight: normal;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
     }
 </style>
