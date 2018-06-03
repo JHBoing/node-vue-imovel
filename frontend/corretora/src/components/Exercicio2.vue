@@ -24,22 +24,24 @@
         <div v-if="carregando">
             Carregando...
         </div>
-        <table class="table table-striped table-bordered">
-            <thead>
-                <th scope="col" class="text-center">#</th>
-                <th scope="col" class="text-center">Saldo devedor</th>
-                <th scope="col" class="text-center">Juros</th>
-                <th scope="col" class="text-center">Valor</th>
-            </thead>
-            <tbody>
-                <tr v-for="item in lista" :key="item.numero">
-                    <th scope="row">{{item.numero}}</th>
-                    <td>{{item.saldoDevedor}}</td>
-                    <td>{{item.juros}}</td>
-                    <td>{{item.valorParcela}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div v-if="recebido">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Saldo devedor</th>
+                    <th scope="col" class="text-center">Juros</th>
+                    <th scope="col" class="text-center">Valor</th>
+                </thead>
+                <tbody>
+                    <tr v-for="item in lista" :key="item.numero">
+                        <th scope="row">{{item.numero}}</th>
+                        <td>{{item.saldoDevedor}}</td>
+                        <td>{{item.juros}}</td>
+                        <td>{{item.valorParcela}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>  
 </template>
 
@@ -58,6 +60,7 @@ export default {
             },
             lista: [],
             carregando: false,
+            recebido: false,
         }
     },
     methods: {
@@ -72,6 +75,7 @@ export default {
             .then((response) => {
                 this.carregando = false;
                 this.lista = response.data;
+                this.recebido = true;
             }, (error) => {
                 this.carregando = false;
                 console.log("erro");
