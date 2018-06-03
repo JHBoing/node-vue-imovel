@@ -17,7 +17,7 @@ router.post('/', function(req, res) {
 		numeroParcelas,
 		porcentagemEntrada,
 	}
-	let salario = req.body.salario * 0.3;
+	let salario = req.body.salario;
     parcelas = ferramentas.calculoParcelas(dadosCalculo);
     console.log(ferramentas.verificaSalario(salario, parcelas[0].valorParcela));
     if (!ferramentas.verificaSalario(salario, parcelas[0].valorParcela)) {
