@@ -19,7 +19,6 @@ router.post('/', function(req, res) {
 	}
 	
 	parcelas = ferramentas.calculoParcelas(dadosCalculo);
-	console.log(parcelas);
 	res.send(parcelas);
 });
 

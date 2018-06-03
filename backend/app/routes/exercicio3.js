@@ -17,10 +17,14 @@ router.post('/', function(req, res) {
 		numeroParcelas,
 		porcentagemEntrada,
 	}
-	
-	parcelas = ferramentas.calculoParcelas(dadosCalculo);
-	console.log(parcelas);
-	res.send(parcelas);
+	let salario = req.body.salario * 0.3;
+    parcelas = ferramentas.calculoParcelas(dadosCalculo);
+    console.log(ferramentas.verificaSalario(salario, parcelas[0].valorParcela));
+    if (!ferramentas.verificaSalario(salario, parcelas[0].valorParcela)) {
+        res.send("Salario insuficiente")
+    } else {
+        res.send(parcelas);
+    }
 });
 
 module.exports = router;

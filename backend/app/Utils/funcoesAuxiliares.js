@@ -40,5 +40,9 @@ module.exports = {
         }
 
         return parcelas;
+    },
+    verificaSalario: function verificaSalario(salario, valorParcela) {
+        if (salario > valorParcela) return true;
+        else return false;
     }
 }
