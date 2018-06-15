@@ -51,15 +51,16 @@ module.exports = {
     },
     calculoDataParcelas: function calculoDataParcelas(data) {
         //transforma data que vem em string para formato Date do javascript
-        let ano = data.substring(0, 4); 
-        let mes = data.substring(5, 7);
-        let dia = data.substring(9, 10);
+        let dia = data.substring(0, 2); 
+        let mes = data.substring(3, 5);
+        let ano = data.substring(6, 10);
         let dataAnterior = new Date(ano, mes, dia);
+        console.log('data anterior: ' + dataAnterior);
         //Calculo da nova data
-        let novoMes = (dataAnterior.getMonth + 1) % 12;
-        novoMes = novoMes === 0 ? 12 : novoMes;
-        let novoAno = dataAnterior.getFullYear() + (((dataAnterior.getMonth() + 1) - novoMes) / 12);
+        let novoMes = (dataAnterior.getMonth() + 1) % 13;
+        let novoAno = dataAnterior.getFullYear() + ( ( (dataAnterior.getMonth() + 1) - novoMes) / 12);
         let novoDia = dia;
+        
         novoMes = this.correcaoMes(novoMes);
         let dataParcela = novoDia + '/' + novoMes + '/' + novoAno;
 

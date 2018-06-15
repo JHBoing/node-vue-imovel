@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label for="dataInicio">Data de inicio</label>
-                    <input type="text" class="form-contrl" id="dataInicio" placeholder="dd/mm/yyyy" v-model="form.dataInicio">
+                    <input type="text" class="form-control" id="dataInicio" placeholder="dd/mm/yyyy" v-model="form.dataInicio">
                     <span>{{this.formErrors.dataInicio}}</span>
                 </div>
                 <button type="submit" class="btn btn-success" v-on:click="enviarDados">Submit</button>
@@ -45,6 +45,7 @@
                         <td>{{item.saldoDevedor}}</td>
                         <td>{{item.juros}}</td>
                         <td>{{item.valorParcela}}</td>
+                        <td>{{item.dataParcela}}</td>
                     </tr>
                 </tbody>
             </table>
