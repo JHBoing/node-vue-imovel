@@ -5,28 +5,26 @@
                 <div class="form-group">
                     <label for="valorImovel">Valor imovel</label>
                     <input type="number" class="form-control" id="valorImovel"  placeholder="R$" v-model="form.valorImovel">
+                    <span v-if='this.formErrors.valorImovel'>{{this.formErrors.valorImovel}}</span>
                 </div>
                 <div class="form-group">
-                    <label for="taxa">Taxa</label>
-                    <input type="number" class="form-control" id="taxa" placeholder="%" v-model="form.taxa">
+                    <label for="salario">Salario</label>
+                    <input type="number" class="form-control" id="salario" placeholder="%" v-model="form.salario">
+                    <span v-if='this.formErrors.salario'>{{this.formErrors.salario}}</span>
                 </div>
                 <div class="form-group">
                     <label for="parcelas">N° de Parcelas</label>
                     <input type="number" class="form-control" id="parcelas" placeholder="N° de Parcelas" v-model="form.numeroParcelas">
-                </div>
-                <div class="form-group">
-                    <label for="parcelas">% de Entrada</label>
-                    <input type="number" class="form-control" id="parcelas" placeholder="% de entrada" v-model="form.porcentagemEntrada">
-                </div>
-                <div class="form-group">
-                    <label for="dataInicio">Data de inicio</label>
-                    <input type="text" class="form-control" id="dataInicio" placeholder="dd/mm/yyyy" v-model="form.dataInicio">
+                    <span>{{this.formErrors.numeroParcelas}}</span>
                 </div>
                 <button type="submit" class="btn btn-success" v-on:click="enviarDados">Submit</button>
             </form>
         </div>
         <div v-if="carregando">
             Carregando...
+        </div>
+        <div v-if="erroServidor">
+            {{this.mensagemErroServidor}}
         </div>
         <div v-if="recebido">
             <table class="table table-striped table-bordered">
@@ -42,53 +40,70 @@
                         <td>{{item.saldoDevedor}}</td>
                         <td>{{item.juros}}</td>
                         <td>{{item.valorParcela}}</td>
-                        <td>{{item.dataParcela}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </div>  
+    </div>
 </template>
-
 <script>
 import axios from 'axios';
 
 export default {
-    name: 'Exercicio2',
-    data () {
+    name: 'Exercicio7',
+    data() {
         return {
             form: {
-                valorImovel: '',
-                taxa: '',
-                numeroParcelas: '',
-                porcentagemEntrada: '',
-                dataInicio: ''
+                valorImovel: null,
+                taxa: '10',
+                numeroParcelas: null,
+                porcentagemEntrada: '20',
+                salario: null,
             },
             lista: [],
             carregando: false,
             recebido: false,
+            formErrors:[ {
+                valorImovel: null,
+                numeroParcelas: null,
+                salario: null,
+            }],
+            erroServidor: false,
+            mensagemErroServidor: null,
         }
     },
     methods: {
         enviarDados(e) {
             e.preventDefault();
-            let form = this.form;
-            this.carregando = true;
-            axios.post(
-                "http://localhost:8000/api/exercicio1",
-                form
-            )
-            .then((response) => {
-                this.carregando = false;
-                this.lista = response.data;
-                this.recebido = true;
-            }, (error) => {
-                this.carregando = false;
-                console.log("erro");
-            })
+            let form = this.form;            
+            if ((this.form.numeroParcelas/12) > 45 ) {
+                this.formErrors.numeroParcelas = "O numero de parcelas equivale a mais que 45 anos."
+            } else {
+                this.carregando = true;
+                axios.post(
+                    "http://localhost:8000/api/exercicio3",
+                    form
+                )
+                .then((response) => {
+                    this.carregando = false;
+                    if (typeof response.data === 'string') {
+                        this.mensagemErroServidor = response.data;
+                        this.erroServidor = true;
+                    } else {
+                        this.erroServidor = false;
+                        this.lista = response.data;
+                        this.recebido = true;
+                    }
+                }, (error) => {
+                    this.carregando = false;
+                    console.log("erro");
+                })
+            }
         }
     }
 }
+
+
 </script>
 
 <style scoped>
@@ -122,20 +137,7 @@ export default {
         background: #41B883;
     }
 
-    h1, h2 {
-        font-weight: normal;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
+    span {
+        color: white;
     }
 </style>
