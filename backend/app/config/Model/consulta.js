@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ConsultaSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     dataConsulta: Date,
     porcEntrada: Number,
     taxa: Number,
-    user: [{type: Schema.Types.ObjectId, ref: 'User'}]
+    user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 mongoose.model('Consulta', ConsultaSchema);
 

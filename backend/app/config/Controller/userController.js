@@ -58,10 +58,11 @@ exports.me = function (req, res) {
                 User.findById(decoded.id, { password: 0 }, function(err, user) {
                     if (err) {
                         return res.status(500).send("Nao foi possivel achar o usuario");
-                    } else if (!User) {
+                    } else if (!user) {
                         return res.status(404).send("Nenhum usuario encontrado");
                     } else {
-                        res.status(200).send(User);
+                        console.log(user);
+                        res.status(200).send(user);
                     }
                 });
             }
