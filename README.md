@@ -9,11 +9,11 @@ Projeto para disciplina de Programacao para Web.
 :white_check_mark:
 4. Construa uma interface web que consulte essa API REST. 
 :white_check_mark:
-5. Com o webservice do exercício 3, modifique a aplicação para que o percentual de entrada, a taxa anual, e o valor máximo da parcela em relação ao salário do indivíduo seja consultado em banco de dados relacional. 
+5. Com o webservice do exercício 3, modifique a aplicação para que o percentual de entrada, a taxa anual, e o valor máximo da parcela em relação ao salário do indivíduo seja consultado em banco de dados relacional. :white_check_mark:
 
-6. Receba na API REST do exercício anterior o CPF, Nome Completo, data de nascimento, se tem FGTS e quanto tem no FGTS e armazene esses dados em base de dados, bem como os dados da simulação. 
+6. Receba na API REST do exercício anterior o CPF, Nome Completo, data de nascimento, se tem FGTS e quanto tem no FGTS e armazene esses dados em base de dados, bem como os dados da simulação. :white_check_mark:
 
-7. Modifique a interface web do exercício 4 para receber esses parâmetros. 
+7. Modifique a interface web do exercício 4 para receber esses parâmetros. :white_check_mark:
 
 8. Crie um webservice que retorne os dados de simulações, recebendo o "offset" (índice do primeiro resultado) e o "limit" (quantidade de registros que tem que trazer. Ordenado por data de inserção. 
 
@@ -24,4 +24,6 @@ Projeto para disciplina de Programacao para Web.
 11. Construa testes automatizados para todos os webservices. 
 
 TODO:
-Data das parcelas
+Data das parcelas :white_check_mark:
+Gerar PDF com listagem dos dados
+Logout

@@ -132,7 +132,7 @@ export default {
                     this.recebido = true;
                 }, (error) => {
                     this.carregando = false;
-                    console.log("erro");
+                    console.log(error);
                 })
             }
         }

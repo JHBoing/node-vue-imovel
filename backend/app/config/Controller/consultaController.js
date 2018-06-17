@@ -12,7 +12,6 @@ var Consulta = mongoose.model('Consulta');
 module.exports = {
     //helpers
     store: function store(userId, parcelas, taxa, porcEntrada) {
-        console.log("entrou no store dda consulta");
         let date = Date.now();
         let novaConsulta = new Consulta({
             dataConsulta: date,

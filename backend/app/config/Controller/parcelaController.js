@@ -12,8 +12,6 @@ var Parcela = mongoose.model('Parcela');
 module.exports = {
     //helpers
     store: function store(consultaId, parcela) {
-        console.log("entrou no store da parcela");
-        console.log(parcela.dataVencimento);
         let novaParcela = new Parcela({
             saldoDevedor: parcela.saldoDevedor,
             juros: parcela.juros,
