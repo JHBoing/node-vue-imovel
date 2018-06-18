@@ -7,7 +7,6 @@ module.exports = {
         let taxa = dadosCalculo.taxa;
         let dataInicial = dadosCalculo.dataInicial; 
         let parcelas = [];
-        console.log(dataInicial);
 
         for(let i = 0; i < numeroParcelas; i++) {
             let numero = '';
@@ -55,7 +54,7 @@ module.exports = {
         let mes = data.substring(3, 5);
         let ano = data.substring(6, 10);
         let dataAnterior = new Date(ano, mes, dia);
-        console.log('data anterior: ' + dataAnterior);
+
         //Calculo da nova data
         let novoMes = (dataAnterior.getMonth() + 1) % 13;
         let novoAno = dataAnterior.getFullYear() + ( ( (dataAnterior.getMonth() + 1) - novoMes) / 12);

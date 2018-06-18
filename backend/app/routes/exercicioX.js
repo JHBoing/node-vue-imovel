@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 let ferramentas = require("../Utils/funcoesAuxiliares");
+let pdfCreator = require('../Utils/pdfCreator');
 let consultaController = require("../config/Controller/consultaController");
 
 router.post('/', function(req, res) {
@@ -25,10 +26,12 @@ router.post('/', function(req, res) {
     parcelas = ferramentas.calculoParcelas(dadosCalculo);
     let userId = req.body.user._id;
 
-    let inserirConsulta = consultaController.store(userId, parcelas, taxa, porcentagemEntrada);
-
+	let inserirConsulta = consultaController.store(userId, parcelas, taxa, porcentagemEntrada);
+	
+	let pdf = pdfCreator.criaPDFParcelas(parcelas);
+	
     if (!ferramentas.verificaSalario(salario, parcelas[0].valorParcela)) {
-        res.send("Salario insuficiente")
+        res.send("Salario insuficiente");
     } else if (inserirConsulta) {
         res.send(parcelas);
     }
