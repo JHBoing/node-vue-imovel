@@ -28,7 +28,7 @@ router.post('/', function(req, res) {
 
 	let inserirConsulta = consultaController.store(userId, parcelas, taxa, porcentagemEntrada);
 	
-	let pdf = pdfCreator.criaPDFParcelas(parcelas);
+	let pdf = pdfCreator.criaPDFParcelas(parcelas, req.body.user.email);
 	
     if (!ferramentas.verificaSalario(salario, parcelas[0].valorParcela)) {
         res.send("Salario insuficiente");

@@ -1,8 +1,8 @@
 let nodemailer = require('nodemailer');
-require('dotenv').config();
+
 
 module.exports = {
-    criaEmail: function criaEmail() {
+    criaEmail: function criaEmail(email) {
         var transporte = nodemailer.createTransport({
             service: "gmail",
             auth: {
@@ -13,7 +13,7 @@ module.exports = {
 
         var email = {
             from: process.env.EMAIL_LOGIN,
-            to: 'emaildestinatario',
+            to: email,
             subject: 'NODE S2',
             html:'Segue anexo o arquivo com o resultado da sua consulta.',
             attachments: [{

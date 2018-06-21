@@ -5,7 +5,7 @@
             <Cadastro v-on:handleAuth="handleAuth" v-on:handleCarregando="handleCarregando" />
         </div>
         <div class="container" v-if="auth">
-            <h2> Bem vindo {{user.nome}} </h2>
+            <h2> Bem vindo {{user.nome}} </h2><button type="button" class="btn btn-danger" v-on:click="logout">Sair</button>
             <div class="form-container">
                 <form class="form-tag">
                     <div class="form-group">
@@ -135,6 +135,10 @@ export default {
                     console.log(error);
                 })
             }
+        },
+        logout() {
+            localStorage.clear();
+            this.auth = false;
         }
     }
 }
