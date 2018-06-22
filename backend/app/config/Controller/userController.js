@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var User = require('../Model/user');
 var User = mongoose.model('User');
 
+
 exports.register = function(req, res) {
     let hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
@@ -20,13 +21,22 @@ exports.register = function(req, res) {
         dataNascimento: req.body.dataNascimento,
         FGTS: req.body.fgts
     });
-    newUser.save(function(err, message) {
-        if (err) res.send(err);
-        let token = jwt.sign({ id: User._id}, config.secret, {
-            expiresIn: 86400 //24 horas
+    
+    let usernameValidation = User.findOne({ username: req.body.username}, function(err) {
+        if (err) res.send("Erro ao cadastrar usuario");
+    });
+
+    if (usernameValidation) {
+        res.status(500).send("Usuario ja cadastrado");
+    } else {
+        newUser.save(function(err, message) {
+            if (err) res.send("Erro ao cadastrar usuario");
+            let token = jwt.sign({ id: User._id}, config.secret, {
+                expiresIn: 86400 //24 horas
+            });
+            res.status(200).send({auth: true, token: token});
         });
-        res.status(200).send({auth: true, token: token});
-    })
+    }
 };
 
 exports.login = function(req, res) {

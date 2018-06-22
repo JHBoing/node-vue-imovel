@@ -1,8 +1,8 @@
 <template>
     <div>
         <div v-if="!auth">
-            <Login v-on:handleAuth="handleAuth" v-on:handleCarregando="handleCarregando" />
-            <Cadastro v-on:handleAuth="handleAuth" v-on:handleCarregando="handleCarregando" />
+            <Login v-on:handleCadastro="handleCadastro" v-on:handleAuth="handleAuth" v-on:handleCarregando="handleCarregando" v-if="!cadastro" />
+            <Cadastro v-on:handleAuth="handleAuth" v-on:handleCarregando="handleCarregando" v-if="cadastro"/>
         </div>
         <div class="container" v-if="auth">
             <h2> Bem vindo {{user.nome}} </h2><button type="button" class="btn btn-danger" v-on:click="logout">Sair</button>
@@ -73,6 +73,7 @@ export default {
         return {
             auth: false,
             carregando: false,
+            cadastro: false,
             user: {
                 _id: null,
                 nome: '',
@@ -97,6 +98,9 @@ export default {
         },
         handleCarregando(carregandoRecebido) {
             this.carregando = carregandoRecebido;
+        },
+        handleCadastro(cadastro) {
+            this.cadastro = cadastro;
         },
         buscaPessoa() {
             let token = localStorage.getItem('userToken');
@@ -132,7 +136,6 @@ export default {
                     this.recebido = true;
                 }, (error) => {
                     this.carregando = false;
-                    console.log(error);
                 })
             }
         },

@@ -12,6 +12,7 @@
                     <input type="password" class="form-control" id="login-password" placeholder="********" v-model="form.password">
                 </div>
                 <button type="submit" class="btn btn-success" v-on:click="enviarDados">Submit</button>
+                <button type="button" class="btn brn-info" v-on:click="cadastro">Cadastro</button>
             </form>
         </div>
     </div>
@@ -26,7 +27,7 @@ export default {
             form: {
                 username: null,
                 password: null,
-            }
+            },
         }
     },
     methods: {
@@ -42,6 +43,10 @@ export default {
                 this.$emit('handleCarregando', false);
                 this.$emit('handleAuth', true); 
             });
+        },
+        cadastro(e) {
+            e.preventDefault();
+            this.$emit('handleCadastro', true);
         }
     }
 }

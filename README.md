@@ -25,6 +25,9 @@ Projeto para disciplina de Programacao para Web.
 
 TODO:
 Data das parcelas :white_check_mark:
+
 Gerar PDF com listagem dos dados
-Logout
-User env :white_check_mark:
+
+Logout :white_check_mark:
+
+Usar env :white_check_mark:
