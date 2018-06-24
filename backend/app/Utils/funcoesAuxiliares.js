@@ -57,7 +57,7 @@ module.exports = {
 
         //Calculo da nova data
         let novoMes = (dataAnterior.getMonth() + 1) % 13;
-        let novoAno = dataAnterior.getFullYear() + ( ( (dataAnterior.getMonth() + 1) - novoMes) / 12);
+        let novoAno = dataAnterior.getFullYear() + (( (dataAnterior.getMonth() + 1) - novoMes) / 12);
         let novoDia = dia;
         
         novoMes = this.correcaoMes(novoMes);
