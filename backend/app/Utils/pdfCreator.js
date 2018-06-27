@@ -16,6 +16,7 @@ module.exports = {
             doc.text(key + ' | ' + parcela.saldoDevedor + ' | ' + parcela.juros + ' | ' + parcela.valorParcela + ' | ' + parcela.dataParcela);
             doc.moveDown();
         });
+
         doc.end();
         emailCreator.criaEmail(email);
         return true;

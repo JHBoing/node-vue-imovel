@@ -18,8 +18,8 @@ module.exports = {
             if(i == 0 ) {
                 numero = i + 1;
                 saldoDevedor = financiavel;
-                juros = saldoDevedor * taxa;
-                valorParcela = juros + amortizacao;
+                juros = Math.round((saldoDevedor * taxa) * 100) / 100;
+                valorParcela = Math.round((juros + amortizacao) * 100) / 100;
                 dataParcela = dataInicial;
                 
                 parcelas.push({
@@ -31,9 +31,9 @@ module.exports = {
                 });
             } else {
                 numero = i + 1;
-                saldoDevedor = parcelas[i-1].saldoDevedor - amortizacao;
-                juros = saldoDevedor * taxa;
-                valorParcela = juros + amortizacao;
+                saldoDevedor = Math.round((parcelas[i-1].saldoDevedor - amortizacao) * 100) / 100;
+                juros = Math.round((saldoDevedor * taxa) * 100) / 100;
+                valorParcela = Math.round((juros + amortizacao) * 100) / 100;
                 dataParcela = this.calculoDataParcelas(parcelas[i-1].dataParcela);
 
                 parcelas.push({

@@ -21,7 +21,7 @@ Projeto para disciplina de Programacao para Web.
 
 10. No webservice do exercício 6 e na tela do exercício 7, adicione um campo para o e-mail (opcional) e se o usuário informar o e-mail, enviar um e-mail com a simulação para o endereço informado. :white_check_mark:
 
-11. Construa testes automatizados para todos os webservices. 
+11. Construa testes automatizados para todos os webservices. :shipit:
 
 TODO:
 Data das parcelas :white_check_mark:

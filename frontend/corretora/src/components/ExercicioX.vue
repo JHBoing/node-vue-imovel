@@ -87,6 +87,7 @@ export default {
                 dataInicio: ''
             },
             recebido: false,
+            lista: []
         }
     },
     methods: {
@@ -132,8 +133,11 @@ export default {
                 )
                 .then((response) => {
                     this.carregando = false;
-                    this.lista = response.data;
-                    this.recebido = true;
+                    console.log(response.data);
+                    if (response.data[0].saldoDevedor) {
+                        this.lista = response.data;
+                        this.recebido = true;
+                    }
                 }, (error) => {
                     this.carregando = false;
                 })
