@@ -27,17 +27,26 @@ router.post('/', function(req, res) {
     let userId = req.body.user._id;
 
 	let inserirConsulta = consultaController.store(userId, parcelas, taxa, porcentagemEntrada);
-	
-	let pdf = pdfCreator.criaPDFParcelas(parcelas, req.body.user.email);
+	pdfCreator.criaPDFParcelas(parcelas, req.body.user.email);
 	
     if (!ferramentas.verificaSalario(salario, parcelas[0].valorParcela)) {
         res.send("Salario insuficiente");
     } else if (inserirConsulta) {
         res.send(parcelas);
     }
-
-
-
 });
+
+router.post('/consultas', async function(req, res) {
+	let userId = req.body.user._id;
+	consultaController.list(userId).then(
+		function (docs){
+			res.send(docs);
+		},
+		function (error) {
+			console.log(error);
+		}
+	);
+});
+
 
 module.exports = router;

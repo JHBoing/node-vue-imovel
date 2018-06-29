@@ -28,5 +28,13 @@ module.exports = {
         });
 
         return true;
+    },
+    list: function list(userId) {
+        return new Promise(function (resolve, reject) {
+            Consulta.find({user: userId}, function(error, docs) {  
+                if (error) reject(error);
+                resolve(docs);
+            });
+        });
     }
 }

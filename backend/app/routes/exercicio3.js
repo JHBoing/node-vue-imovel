@@ -20,7 +20,6 @@ router.post('/', function(req, res) {
 		dataInicial
 	}
 	let salario = req.body.salario;
-	console.log(dadosCalculo);
     parcelas = ferramentas.calculoParcelas(dadosCalculo);
     if (!ferramentas.verificaSalario(salario, parcelas[0].valorParcela)) {
         res.send("Salario insuficiente")

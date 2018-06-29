@@ -114,6 +114,7 @@ export default {
                 this.user.nome = response.data.nome;
                 this.user._id = response.data._id;
                 this.user.email = response.data.email;
+                this.buscaConsultas();
             });
         },
         enviarDados(e) {
@@ -140,12 +141,24 @@ export default {
                     }
                 }, (error) => {
                     this.carregando = false;
-                })
+                });
             }
         },
         logout() {
             localStorage.clear();
             this.auth = false;
+        },
+        buscaConsultas() {
+            let user = this.user;
+            console.log(user);
+            axios.post(
+                'http://localhost:8000/api/exerciciox/consultas',
+                {
+                    user
+                }
+            ).then((response) => {
+                console.log(response);
+            });
         }
     }
 }

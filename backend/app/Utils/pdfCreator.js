@@ -11,7 +11,7 @@ module.exports = {
 
         doc.moveDown();
         doc.fontSize(14)
-        doc.text('Saldo Devedor | Juros | Valor | Data de Vencimento')
+        doc.text('Saldo Devedor | Juros | Valor | Data de Vencimento');
         parcelas.map((parcela, key) => {            
             doc.text(key + ' | ' + parcela.saldoDevedor + ' | ' + parcela.juros + ' | ' + parcela.valorParcela + ' | ' + parcela.dataParcela);
             doc.moveDown();
