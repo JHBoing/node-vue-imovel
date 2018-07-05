@@ -87,7 +87,8 @@ export default {
                 dataInicio: ''
             },
             recebido: false,
-            lista: []
+            lista: [],
+            consultas: []
         }
     },
     methods: {
@@ -149,15 +150,15 @@ export default {
             this.auth = false;
         },
         buscaConsultas() {
-            let user = this.user;
-            console.log(user);
-            axios.post(
-                'http://localhost:8000/api/exerciciox/consultas',
+            let token = localStorage.getItem('userToken');
+
+            let url = 'http://localhost:8000/api/exerciciox/consultas/';
+            axios.get(url,
                 {
-                    user
+                    headers: { 'x-access-token': token }
                 }
             ).then((response) => {
-                console.log(response);
+                this.consultas = response;
             });
         }
     }

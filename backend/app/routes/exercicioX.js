@@ -36,8 +36,9 @@ router.post('/', function(req, res) {
     }
 });
 
-router.post('/consultas', async function(req, res) {
-	let userId = req.body.user._id;
+router.get('/consultas/', async function(req, res) {
+	let token = req.headers['x-access-token'];
+	let userId = req.params.id;
 	consultaController.list(userId).then(
 		function (docs){
 			res.send(docs);

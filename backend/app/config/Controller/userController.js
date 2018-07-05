@@ -4,39 +4,32 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var config = require('../config');
 var mongoose = require('mongoose');
-
+var moment = require('moment');
 var User = require('../Model/user');
 var User = mongoose.model('User');
 
 
 exports.register = function(req, res) {
     let hashedPassword = bcrypt.hashSync(req.body.password, 8);
-
+    let dataReal = moment(req.body.dataNascimento, "DD/MM/YYYY").format('MM/DD/YYYY');
+    console.log(dataReal);
     let newUser = new User({
         username: req.body.username,
         password: hashedPassword,
         email: req.body.email,
         nome: req.body.nome,
         CPF: req.body.cpf,
-        dataNascimento: req.body.dataNascimento,
+        dataNascimento: dataReal,
         FGTS: req.body.fgts
     });
     
-    let usernameValidation = User.findOne({ username: req.body.username}, function(err) {
-        if (err) res.send("Erro ao cadastrar usuario");
-    });
-
-    if (usernameValidation) {
-        res.status(500).send("Usuario ja cadastrado");
-    } else {
-        newUser.save(function(err, message) {
-            if (err) res.send("Erro ao cadastrar usuario");
-            let token = jwt.sign({ id: User._id}, config.secret, {
-                expiresIn: 86400 //24 horas
-            });
-            res.status(200).send({auth: true, token: token});
+    newUser.save(function(err, message) {
+        if (err) console.log(err);
+        let token = jwt.sign({ id: User._id}, config.secret, {
+            expiresIn: 86400 //24 horas
         });
-    }
+        res.status(200).send({auth: true, token: token});
+    });
 };
 
 exports.login = function(req, res) {
